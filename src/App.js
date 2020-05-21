@@ -9,9 +9,7 @@ function App() {
   useEffect(() =>{
 
     async function loadRepositories(){
-      console.log('load');
       const response = await api.get('repositories');
-      console.log(response);
       setRepositories(response.data);
     }
 
@@ -26,14 +24,12 @@ function App() {
     });
 
     if (response.data){
-      console.log(response.data);
       setRepositories([...repositories, response.data]);
     }
   }
 
   async function handleRemoveRepository(id) {
     const response = await api.delete(`repositories/${id}`);
-    console.log(response);
 
     if (response.status === 204){
       const index = repositories.findIndex(repo => repo.id === id);
@@ -41,7 +37,6 @@ function App() {
       if (index >= 0){
         const newRepositories = [...repositories];
         newRepositories.splice(index, 1);
-        console.log(newRepositories);
         setRepositories(newRepositories);
       }
     }
